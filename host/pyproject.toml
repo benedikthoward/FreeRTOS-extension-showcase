@@ -1,0 +1,13 @@
+[project]
+name = "freertos-monitor"
+version = "0.1.0"
+description = "Live task monitor GUI for FreeRTOS extension demos"
+requires-python = ">=3.10"
+dependencies = [
+    "PyQt6>=6.5",
+    "pyqtgraph>=0.13",
+    "pyserial>=3.5",
+]
+
+[project.scripts]
+monitor = "monitor:main"

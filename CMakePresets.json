@@ -1,0 +1,160 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 21,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "default",
+            "displayName": "Default (no demos)",
+            "description": "Base configuration — no demo targets enabled",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "BUILD_EDF": "OFF",
+                "BUILD_SRP": "OFF",
+                "BUILD_CBS": "OFF",
+                "BUILD_MP":  "OFF"
+            }
+        },
+        {
+            "name": "edf",
+            "displayName": "EDF Demo",
+            "description": "Earliest Deadline First scheduling demo",
+            "inherits": "default",
+            "cacheVariables": {
+                "BUILD_EDF": "ON",
+                "configUSE_EDF": "1"
+            }
+        },
+        { "name": "edf-s1", "inherits": "edf", "displayName": "EDF S1: Timeline",
+          "cacheVariables": { "DEMO_SCENARIO": "1" } },
+        { "name": "edf-s2", "inherits": "edf", "displayName": "EDF S2: Admission",
+          "cacheVariables": { "DEMO_SCENARIO": "2" } },
+        { "name": "edf-s3", "inherits": "edf", "displayName": "EDF S3: Deadline Miss",
+          "cacheVariables": { "DEMO_SCENARIO": "3" } },
+        { "name": "edf-s4", "inherits": "edf", "displayName": "EDF S4: Dynamic Arrival",
+          "cacheVariables": { "DEMO_SCENARIO": "4" } },
+        { "name": "edf-s5", "inherits": "edf", "displayName": "EDF S5: Sporadic ISR",
+          "cacheVariables": { "DEMO_SCENARIO": "5" } },
+        {
+            "name": "srp",
+            "displayName": "SRP Demo",
+            "description": "Stack Resource Policy demo (requires EDF)",
+            "inherits": "default",
+            "cacheVariables": {
+                "BUILD_EDF": "ON",
+                "BUILD_SRP": "ON",
+                "configUSE_EDF": "1",
+                "configUSE_SRP": "1"
+            }
+        },
+        { "name": "srp-s1", "inherits": "srp", "displayName": "SRP S1: Correctness",
+          "cacheVariables": { "DEMO_SCENARIO": "1" } },
+        { "name": "srp-s2", "inherits": "srp", "displayName": "SRP S2: Admission + Blocking",
+          "cacheVariables": { "DEMO_SCENARIO": "2" } },
+        { "name": "srp-s3", "inherits": "srp", "displayName": "SRP S3: Stack Sharing",
+          "cacheVariables": { "DEMO_SCENARIO": "3" } },
+        { "name": "srp-s4", "inherits": "srp", "displayName": "SRP S4: Nested Locking",
+          "cacheVariables": { "DEMO_SCENARIO": "4" } },
+        {
+            "name": "cbs",
+            "displayName": "CBS Demo",
+            "description": "Constant Bandwidth Server demo (requires EDF)",
+            "inherits": "default",
+            "cacheVariables": {
+                "BUILD_EDF": "ON",
+                "BUILD_CBS": "ON",
+                "configUSE_EDF": "1",
+                "configUSE_CBS": "1"
+            }
+        },
+        { "name": "cbs-s1", "inherits": "cbs", "displayName": "CBS S1: Single CBS",
+          "cacheVariables": { "DEMO_SCENARIO": "1" } },
+        { "name": "cbs-s2", "inherits": "cbs", "displayName": "CBS S2: Budget Exhaustion",
+          "cacheVariables": { "DEMO_SCENARIO": "2" } },
+        { "name": "cbs-s3", "inherits": "cbs", "displayName": "CBS S3: Isolation",
+          "cacheVariables": { "DEMO_SCENARIO": "3" } },
+        { "name": "cbs-s4", "inherits": "cbs", "displayName": "CBS S4: Admission",
+          "cacheVariables": { "DEMO_SCENARIO": "4" } },
+        {
+            "name": "mp",
+            "displayName": "MP Demo (Global EDF)",
+            "description": "Multiprocessor global EDF scheduling demo",
+            "inherits": "default",
+            "cacheVariables": {
+                "BUILD_EDF": "ON",
+                "BUILD_MP":  "ON",
+                "configUSE_EDF": "1",
+                "configUSE_MP":  "1",
+                "GLOBAL_EDF_ENABLE": "1",
+                "PARTITIONED_EDF_ENABLE": "0"
+            }
+        },
+        {
+            "name": "mp-partitioned",
+            "displayName": "MP Demo (Partitioned EDF)",
+            "description": "Multiprocessor partitioned EDF scheduling demo",
+            "inherits": "default",
+            "cacheVariables": {
+                "BUILD_EDF": "ON",
+                "BUILD_MP":  "ON",
+                "configUSE_EDF": "1",
+                "configUSE_MP":  "1",
+                "GLOBAL_EDF_ENABLE": "0",
+                "PARTITIONED_EDF_ENABLE": "1"
+            }
+        },
+        { "name": "mp-s1", "inherits": "mp", "displayName": "MP S1: Global EDF",
+          "cacheVariables": { "DEMO_SCENARIO": "1" } },
+        { "name": "mp-s2", "inherits": "mp-partitioned", "displayName": "MP S2: Partitioned WFD",
+          "cacheVariables": { "DEMO_SCENARIO": "2" } },
+        { "name": "mp-s3", "inherits": "mp-partitioned", "displayName": "MP S3: Manual Partition",
+          "cacheVariables": { "DEMO_SCENARIO": "3" } },
+        { "name": "mp-s4", "inherits": "mp-partitioned", "displayName": "MP S4: Migration",
+          "cacheVariables": { "DEMO_SCENARIO": "4" } },
+        { "name": "mp-s5", "inherits": "mp", "displayName": "MP S5: Admission",
+          "cacheVariables": { "DEMO_SCENARIO": "5" } },
+        {
+            "name": "all",
+            "displayName": "All Single-Core Demos",
+            "description": "Build EDF, SRP, and CBS demo targets (single-core)",
+            "inherits": "default",
+            "cacheVariables": {
+                "BUILD_EDF": "ON",
+                "BUILD_SRP": "ON",
+                "BUILD_CBS": "ON",
+                "configUSE_EDF": "1",
+                "configUSE_SRP": "1",
+                "configUSE_CBS": "1"
+            }
+        }
+    ],
+    "buildPresets": [
+        { "name": "edf",    "configurePreset": "edf",    "displayName": "Build EDF Demo" },
+        { "name": "edf-s1", "configurePreset": "edf-s1", "displayName": "Build EDF S1" },
+        { "name": "edf-s2", "configurePreset": "edf-s2", "displayName": "Build EDF S2" },
+        { "name": "edf-s3", "configurePreset": "edf-s3", "displayName": "Build EDF S3" },
+        { "name": "edf-s4", "configurePreset": "edf-s4", "displayName": "Build EDF S4" },
+        { "name": "edf-s5", "configurePreset": "edf-s5", "displayName": "Build EDF S5" },
+        { "name": "srp",    "configurePreset": "srp",    "displayName": "Build SRP Demo" },
+        { "name": "srp-s1", "configurePreset": "srp-s1", "displayName": "Build SRP S1" },
+        { "name": "srp-s2", "configurePreset": "srp-s2", "displayName": "Build SRP S2" },
+        { "name": "srp-s3", "configurePreset": "srp-s3", "displayName": "Build SRP S3" },
+        { "name": "srp-s4", "configurePreset": "srp-s4", "displayName": "Build SRP S4" },
+        { "name": "cbs",    "configurePreset": "cbs",    "displayName": "Build CBS Demo" },
+        { "name": "cbs-s1", "configurePreset": "cbs-s1", "displayName": "Build CBS S1" },
+        { "name": "cbs-s2", "configurePreset": "cbs-s2", "displayName": "Build CBS S2" },
+        { "name": "cbs-s3", "configurePreset": "cbs-s3", "displayName": "Build CBS S3" },
+        { "name": "cbs-s4", "configurePreset": "cbs-s4", "displayName": "Build CBS S4" },
+        { "name": "mp",              "configurePreset": "mp",              "displayName": "Build MP Global" },
+        { "name": "mp-partitioned",  "configurePreset": "mp-partitioned",  "displayName": "Build MP Partitioned" },
+        { "name": "mp-s1", "configurePreset": "mp-s1", "displayName": "Build MP S1" },
+        { "name": "mp-s2", "configurePreset": "mp-s2", "displayName": "Build MP S2" },
+        { "name": "mp-s3", "configurePreset": "mp-s3", "displayName": "Build MP S3" },
+        { "name": "mp-s4", "configurePreset": "mp-s4", "displayName": "Build MP S4" },
+        { "name": "mp-s5", "configurePreset": "mp-s5", "displayName": "Build MP S5" },
+        { "name": "all",   "configurePreset": "all",   "displayName": "Build All Demos" }
+    ]
+}

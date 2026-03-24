@@ -1,0 +1,47 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build freertos_blink",
+            "type": "shell",
+            "command": "cmake --preset default && cmake --build build/default --target freertos_blink",
+            "group": "build",
+            "problemMatcher": ["$gcc"]
+        },
+        { "label": "Build edf-s1", "type": "shell", "command": "cmake --preset edf-s1 && cmake --build --preset edf-s1", "group": "build", "problemMatcher": ["$gcc"] },
+        { "label": "Build edf-s2", "type": "shell", "command": "cmake --preset edf-s2 && cmake --build --preset edf-s2", "group": "build", "problemMatcher": ["$gcc"] },
+        { "label": "Build edf-s3", "type": "shell", "command": "cmake --preset edf-s3 && cmake --build --preset edf-s3", "group": "build", "problemMatcher": ["$gcc"] },
+        { "label": "Build edf-s4", "type": "shell", "command": "cmake --preset edf-s4 && cmake --build --preset edf-s4", "group": "build", "problemMatcher": ["$gcc"] },
+        { "label": "Build edf-s5", "type": "shell", "command": "cmake --preset edf-s5 && cmake --build --preset edf-s5", "group": "build", "problemMatcher": ["$gcc"] },
+        { "label": "Build srp-s1", "type": "shell", "command": "cmake --preset srp-s1 && cmake --build --preset srp-s1", "group": "build", "problemMatcher": ["$gcc"] },
+        { "label": "Build srp-s2", "type": "shell", "command": "cmake --preset srp-s2 && cmake --build --preset srp-s2", "group": "build", "problemMatcher": ["$gcc"] },
+        { "label": "Build srp-s3", "type": "shell", "command": "cmake --preset srp-s3 && cmake --build --preset srp-s3", "group": "build", "problemMatcher": ["$gcc"] },
+        { "label": "Build srp-s4", "type": "shell", "command": "cmake --preset srp-s4 && cmake --build --preset srp-s4", "group": "build", "problemMatcher": ["$gcc"] },
+        { "label": "Build cbs-s1", "type": "shell", "command": "cmake --preset cbs-s1 && cmake --build --preset cbs-s1", "group": "build", "problemMatcher": ["$gcc"] },
+        { "label": "Build cbs-s2", "type": "shell", "command": "cmake --preset cbs-s2 && cmake --build --preset cbs-s2", "group": "build", "problemMatcher": ["$gcc"] },
+        { "label": "Build cbs-s3", "type": "shell", "command": "cmake --preset cbs-s3 && cmake --build --preset cbs-s3", "group": "build", "problemMatcher": ["$gcc"] },
+        { "label": "Build cbs-s4", "type": "shell", "command": "cmake --preset cbs-s4 && cmake --build --preset cbs-s4", "group": "build", "problemMatcher": ["$gcc"] },
+        { "label": "Build mp-s1",  "type": "shell", "command": "cmake --preset mp-s1 && cmake --build --preset mp-s1",   "group": "build", "problemMatcher": ["$gcc"] },
+        { "label": "Build mp-s2",  "type": "shell", "command": "cmake --preset mp-s2 && cmake --build --preset mp-s2",   "group": "build", "problemMatcher": ["$gcc"] },
+        { "label": "Build mp-s3",  "type": "shell", "command": "cmake --preset mp-s3 && cmake --build --preset mp-s3",   "group": "build", "problemMatcher": ["$gcc"] },
+        { "label": "Build mp-s4",  "type": "shell", "command": "cmake --preset mp-s4 && cmake --build --preset mp-s4",   "group": "build", "problemMatcher": ["$gcc"] },
+        { "label": "Build mp-s5",  "type": "shell", "command": "cmake --preset mp-s5 && cmake --build --preset mp-s5",   "group": "build", "problemMatcher": ["$gcc"] },
+        {
+            "label": "Flash via pyocd",
+            "type": "shell",
+            "command": "${env:HOME}/.local/bin/pyocd flash -t rp2350 ${input:elfFile} && ${env:HOME}/.local/bin/pyocd reset -t rp2350",
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "elfFile",
+            "type": "command",
+            "command": "extension.commandvariable.file.pickFile",
+            "args": {
+                "include": "build/**/*.elf",
+                "description": "Select ELF to flash"
+            }
+        }
+    ]
+}

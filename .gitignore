@@ -1,0 +1,28 @@
+# Build output
+build/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+
+# uv
+host/uv.lock
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+
+# Pico SDK artifacts
+*.uf2
+*.elf
+*.bin
+*.hex
+*.dis
+*.map
